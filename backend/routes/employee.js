@@ -19,10 +19,6 @@ const upload = multer({
 
 const LEAVE_TYPES = ['casual','sick','maternity','compOff','religious'];
 
-/**
- * Compute total approved leave "usage" per type and remaining "available"
- * given a user's current leavesBalance.
- */
 async function computeUsageAndAvailable(userId, balances = {}) {
   const usedAgg = await Leave.aggregate([
     { $match: { employee: userId, status: 'approved' } },
@@ -44,8 +40,6 @@ async function computeUsageAndAvailable(userId, balances = {}) {
 
   return { usage, available };
 }
-
-// ---- routes ---------------------------------------------------------------
 
 // GET /api/employee/me
 router.get('/me', requireAuth, requireRole('employee'), async (req, res) => {

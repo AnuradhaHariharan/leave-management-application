@@ -64,7 +64,7 @@ export default function MyLeaves(){
     let count = 0;
     const d = new Date(s);
     while (d <= e) {
-      const day = d.getDay(); // 0 Sun .. 6 Sat
+      const day = d.getDay(); 
       if (day !== 0 && day !== 6) count++;
       d.setDate(d.getDate() + 1);
     }
@@ -89,11 +89,11 @@ export default function MyLeaves(){
 
     // guard on client before POST
     if (requestedDays <= 0) {
-      toast.error('❌ Invalid date range (no business days).');
+      toast.error(' Invalid date range (no business days).');
       return;
     }
     if (requestedDays > leftForType && leftForType >= 0) {
-      toast.error(`❌ Requested ${requestedDays} business days but only ${leftForType} left for ${type}.`);
+      toast.error(` Requested ${requestedDays} business days but only ${leftForType} left for ${type}.`);
       return;
     }
 
@@ -109,14 +109,13 @@ export default function MyLeaves(){
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
-      toast.success('✅ Leave applied successfully');
+      toast.success('Leave applied successfully');
       setStart(''); setEnd(''); setReason(''); setDoc(null);
-      // refresh balances & history
       fetchAvailable();
       fetchLeaves();
     }catch(err){
       const msg = err?.response?.data?.error || err?.message || 'Error applying leave';
-      toast.error(`❌ ${msg}`);
+      toast.error(`${msg}`);
     }
   }
 

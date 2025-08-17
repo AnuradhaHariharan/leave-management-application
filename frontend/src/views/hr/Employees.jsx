@@ -18,7 +18,6 @@ export default function Employees(){
     try{
       setLoading(true);
       const res = await http.get('/api/hr/employees', { params: { q: query } });
-      console.log('Employee API response:', res.data.data);
       setEmps(res.data.data || []);
     }catch(err){
       toast.error('Failed to load employees');

@@ -1,16 +1,34 @@
 import React, { useState } from 'react';
 import {
   Container, Typography, Box, Paper, Grid, TextField, Button,
-  Divider, Dialog, DialogTitle, DialogContent, DialogActions, Stack
+  Divider, Dialog, DialogTitle, DialogContent, DialogActions, Stack,
+  FormControl, InputLabel, Select, MenuItem
 } from '@mui/material';
 import { toast } from 'react-toastify';
 import http from '../../api/client';
 
+const DEPARTMENTS = [
+  'Engineering',
+  'Product',
+  'Design',
+  'Marketing',
+  'Sales',
+  'Customer Support',
+  'HR',
+  'Finance',
+  'Operations',
+  'IT',
+  'Legal',
+  'Admin',
+  'Other'
+];
+
 export default function Onboard(){
-  const [first, setFirst]   = useState('');
-  const [last, setLast]     = useState('');
-  const [dob, setDob]       = useState('');
-  const [dept, setDept]     = useState('');
+  const [first, setFirst]     = useState('');
+  const [last, setLast]       = useState('');
+  const [dob, setDob]         = useState('');
+  const [dept, setDept]       = useState('Engineering'); // default pick (change if you want)
+  const [otherDept, setOther] = useState('');
   const [joining, setJoining] = useState('');
 
   const [loading, setLoading] = useState(false);
@@ -20,13 +38,21 @@ export default function Onboard(){
 
   async function submit(e){
     e.preventDefault();
+
+    // If "Other" selected, ensure free-text provided
+    const finalDept = dept === 'Other' ? otherDept.trim() : dept;
+    if (!finalDept) {
+      toast.error('Please specify the department');
+      return;
+    }
+
     setLoading(true);
     try{
       const res = await http.post('/api/hr/onboard', {
         firstName: first.trim(),
         lastName:  last.trim(),
         dob,
-        department: dept.trim(),
+        department: finalDept,
         joiningDate: joining
       });
 
@@ -36,12 +62,12 @@ export default function Onboard(){
       setNewEmail(email);
       setNewPass(password);
       setCredsOpen(true);
-      toast.success(' Employee onboarded successfully');
+      toast.success('Employee onboarded successfully');
 
-      setFirst(''); setLast(''); setDob(''); setDept(''); setJoining('');
+      setFirst(''); setLast(''); setDob(''); setDept('Engineering'); setOther(''); setJoining('');
     }catch(err){
       const msg = err?.response?.data?.error || err?.message || 'Error onboarding';
-      toast.error(`${msg}`);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }
@@ -67,11 +93,7 @@ export default function Onboard(){
           background: '#fff'
         }}
       >
-        <Box
-          component="form"
-          onSubmit={submit}
-          sx={{ display: 'grid', gap: 2 }}
-        >
+        <Box component="form" onSubmit={submit} sx={{ display: 'grid', gap: 2 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -117,15 +139,35 @@ export default function Onboard(){
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                label="Department"
-                value={dept}
-                onChange={e => setDept(e.target.value)}
-                fullWidth
-                required
-              />
+            {/* Department as dropdown */}
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth required>
+                <InputLabel id="dept-label">Department</InputLabel>
+                <Select
+                  labelId="dept-label"
+                  value={dept}
+                  label="Department"
+                  onChange={(e)=> setDept(e.target.value)}
+                >
+                  {DEPARTMENTS.map((d) => (
+                    <MenuItem key={d} value={d}>{d}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
+
+            {/* Free text for 'Other' */}
+            {dept === 'Other' && (
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Specify Department"
+                  value={otherDept}
+                  onChange={(e)=>setOther(e.target.value)}
+                  fullWidth
+                  required
+                />
+              </Grid>
+            )}
           </Grid>
 
           <Divider sx={{ my: 1 }} />

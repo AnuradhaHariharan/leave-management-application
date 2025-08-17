@@ -23,7 +23,7 @@ export default function MyProfile(){
 
   const initials = `${user.firstName?.[0] || ''}${user.lastName?.[0] || ''}`.toUpperCase();
 
-  // helpers to compute label values safely
+
   const lb = user.leavesBalance || {};
   const usage = user.usage || {};
   const available = user.available || {};
@@ -42,7 +42,7 @@ export default function MyProfile(){
     const used = usedOf(keyName);
     const total = totalOf(keyName);
     const left = leftOf(keyName);
-    const low = left <= 2; // optional highlight threshold
+    const low = left <= 2; 
     return (
       <Chip
         label={`${label} • ${left} left (${used}/${total})`}
