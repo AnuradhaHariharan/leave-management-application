@@ -5,6 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node index.js",
+    "seed:hr": "node scripts/seed-hr.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {

@@ -18,7 +18,7 @@ export default function MyLeaves(){
   const [doc, setDoc] = useState(null);
 
   // fetched from /api/employee/me
-  const [available, setAvailable] = useState({});   // { casual, sick, maternity, compOff, religious }
+  const [available, setAvailable] = useState({});   
 
   const needsDocHint = (type === 'maternity') || (type === 'sick');
 
