@@ -1,10 +1,10 @@
-1) Overview
+## Overview
 
 Role-based Leave Management System with React + MUI frontend and Express + MongoDB backend.
 Auth via JWT, uploads via Multer, strict server-side validations (DOJ, overlap, business days, balances).
 Primary roles: Employee, HR (future: Manager approval chain).
 
-2) System Architecture
+## System Architecture
 
 flowchart LR
   A[React + MUI (Browser)] -- HTTPS + JWT --> B[Express API (Node.js)]
@@ -16,7 +16,7 @@ flowchart LR
     D
   end
 
-3) Process Flow (E2E)
+## Process Flow (E2E)
 
 flowchart TD
   subgraph HR_or_Manager[HR / Manager]
@@ -57,14 +57,14 @@ flowchart TD
   S -->|Approve| T
   S -->|Reject| U
 
-4) Roles & Access
+## Roles & Access
 
 Employee: apply/cancel (pending), view balances/history.
 HR: onboard users, view/decide all requests, view directory & balances.
 Auth: Email/password → JWT (Bearer).
 Middleware: requireAuth, requireRole('employee'|'hr').
 
-5) Future Enhancements
+## Future Enhancements
 
 Richer employee profile: department, designation, location, probation, manager chain.
 
