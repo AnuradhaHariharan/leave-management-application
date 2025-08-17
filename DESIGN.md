@@ -6,7 +6,7 @@ Primary roles: Employee, HR (future: Manager approval chain).
 
 ## System Architecture
 
-flowchart LR
+```flowchart LR
   A[React + MUI (Browser)] -- HTTPS + JWT --> B[Express API (Node.js)]
   B --> C[(MongoDB)]
   B -- Multer --> D[(uploads/)]
@@ -14,11 +14,11 @@ flowchart LR
     B
     C
     D
-  end
+  end ```
 
 ## Process Flow (E2E)
 
-flowchart TD
+```flowchart TD
   subgraph HR_or_Manager[HR / Manager]
     A[Onboard Employee\n(create user, set role/manager,\nset Date of Joining, initial balances)]
     R[Review Leave Request]
@@ -55,7 +55,7 @@ flowchart TD
 
   F --> R --> S
   S -->|Approve| T
-  S -->|Reject| U
+  S -->|Reject| U ```
 
 ## Roles & Access
 
