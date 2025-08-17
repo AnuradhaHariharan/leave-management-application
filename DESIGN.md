@@ -14,7 +14,8 @@ Primary roles: Employee, HR (future: Manager approval chain).
     B
     C
     D
-  end ```
+  end
+```
 
 ## Process Flow (E2E)
 
@@ -55,7 +56,8 @@ Primary roles: Employee, HR (future: Manager approval chain).
 
   F --> R --> S
   S -->|Approve| T
-  S -->|Reject| U ```
+  S -->|Reject| U
+```
 
 ## Roles & Access
 
