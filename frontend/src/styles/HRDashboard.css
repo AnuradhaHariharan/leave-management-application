@@ -1,0 +1,9 @@
+
+.dashboard-container { display: flex; }
+.navbar { background-color: #112240 !important; color: white !important; box-shadow: none; }
+.toolbar { display: flex; justify-content: space-between; align-items: center; }
+.sidebar { width: 220px; margin-top: 64px; background-color: #112240 !important; color: white !important; }
+.menu-item { color: white !important; transition: background 0.3s ease, color 0.3s ease; }
+.menu-item:hover { background-color: #64ffda !important; color: #112240 !important; }
+.main-content { flex-grow: 1; padding: 24px; margin-top: 64px; margin-left: 220px; background-color: #f4f6f8; min-height: 100vh; }
+.doc-link { color: #112240; text-decoration: underline; }
