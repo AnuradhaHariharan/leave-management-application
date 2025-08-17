@@ -7,6 +7,7 @@ const Leave = require('../models/Leave');
 const WorkLog = require('../models/WorkLog');
 const bcrypt = require('bcrypt');
 const { body, validationResult } = require('express-validator');
+const nodemailer = require('nodemailer');
 
 // Onboard employee - HR only
 router.post('/onboard', requireAuth, requireRole('hr'),

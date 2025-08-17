@@ -19,7 +19,7 @@ const userSchema = new Schema({
   department: { type: String },
   joiningDate: { type: Date },
   dob: { type: Date },
-  leaveBalance: { type: Number, default: 24 }, // legacy
+  leaveBalance: { type: Number, default: 24 }, 
   leavesBalance: { type: LeaveBalanceSchema, default: () => ({}) }
 }, { timestamps: true });
 

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import http from '../api/client';
 import { useNavigate } from 'react-router-dom';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
+import { toast } from 'react-toastify';
 
 export default function Login(){
   const [email,setEmail]=useState(''); const [password,setPassword]=useState('');
@@ -14,7 +15,11 @@ export default function Login(){
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('role', res.data.role);
       nav(res.data.role === 'hr' ? '/hr' : '/employee');
-    }catch(err){ alert(err?.response?.data?.error || 'Login failed'); }
+    }catch(err){
+      const msg =
+      err?.response?.data?.error || err?.message || 'Error Logging in';
+    toast.error(`${msg}`);
+  }
   }
   return (<Container maxWidth="xs" sx={{mt:6}}>
     <Typography variant="h5">Login</Typography>

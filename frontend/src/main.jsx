@@ -6,6 +6,7 @@ import Login from './views/Login'
 import HRDashboard from './views/hr/HRDashboard'
 import EmployeeDashboard from './views/employee/EmployeeDashboard'
 import CssBaseline from '@mui/material/CssBaseline'
+import { ToastContainer } from 'react-toastify';
 
 function App(){
   const token = localStorage.getItem('token');
@@ -13,6 +14,7 @@ function App(){
   return (
     <BrowserRouter>
       <CssBaseline />
+      <ToastContainer position="top-right" autoClose={3000} />
       <Routes>
         <Route path="/" element={ token ? (role === 'hr' ? <Navigate to='/hr'/> : <Navigate to='/employee'/> ) : <Navigate to='/login'/> }/>
         <Route path="/login" element={<Login/>} />
